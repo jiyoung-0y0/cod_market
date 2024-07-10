@@ -64,9 +64,9 @@
                 질문 리스트
             </div>
 
-            <ul class="list-group list-group-flush gap-2">
-                <li th:each="question: ${product.questionList}" class="list-group-item">
-                    <span th:text="${question.id}" class="badge bd-secondary"></span>
+            <ul class="list-group list-group-flush gap-2 ml-3">
+                <li th:each="question, loop : ${product.questionList}" class="list-group-item">
+                    <span class="badge bg-secondary" th:text="${question.id}" ></span>
                     <span th:text="${question.content}"></span>
 
                     <a href="#" class="btn btn-sm btn-info">수정</a>
