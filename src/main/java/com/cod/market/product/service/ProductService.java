@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,5 +26,12 @@ public class ProductService {
         p.setPrice(price);
         p.setCreateDate(LocalDateTime.now());
         productRepository.save(p);
+    }
+
+    public Product getProduct(Long id) {
+        Optional<Product> product = productRepository.findById(id);
+
+        // TODO: 없을 경우 예외처리 예정
+        return product.get();
     }
 }
