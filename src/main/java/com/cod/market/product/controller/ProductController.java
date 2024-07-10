@@ -28,6 +28,7 @@ public class ProductController {
     public String detail(@PathVariable("id") Long id, Model model){
 
 
+
         return "product/detail";
     }
 }
