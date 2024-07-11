@@ -31,7 +31,10 @@ public class ProductService {
     public Product getProduct(Long id) {
         Optional<Product> product = productRepository.findById(id);
 
-        // TODO: 없을 경우 예외처리 예정
-        return product.get();
+        if (product.isPresent()) {
+            return product.get();
+        } else {
+            throw new RuntimeException("product is not found");
+        }
     }
 }
