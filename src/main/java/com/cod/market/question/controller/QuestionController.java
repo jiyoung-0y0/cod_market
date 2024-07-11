@@ -7,9 +7,12 @@ import com.cod.market.product.service.ProductService;
 import com.cod.market.question.entity.Question;
 import com.cod.market.question.service.QuestionService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
 
@@ -21,6 +24,7 @@ public class QuestionController {
     private final ProductService productService;
     private final MemberService memberService;
 
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create/{id}")
     public String create(
             @PathVariable("id") Long id,
@@ -34,15 +38,19 @@ public class QuestionController {
 
         return String.format("redirect:/product/detail/%s", id);
     }
-
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/modify/{id}")
-    public String modify(@PathVariable("id") Long id, Model model) {
+    public String modify(@PathVariable("id") Long id, Model model, Principal principal) {
         Question question = questionService.getQuestion(id);
+
+        if(!question.getMember().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한 없음");
+        }
 
         model.addAttribute("question", question);
         return "question/modify";
     }
-
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/modify/{id}")
     public String modify(
             @PathVariable("id") Long id,
@@ -53,14 +61,22 @@ public class QuestionController {
         questionService.modify(question, content);
         long productId = question.getProduct().getId();
 
+        if(!question.getMember().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한 없음");
+        }
+
         return String.format("redirect:/product/detail/%s", productId);
     }
-
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long id) {
+    public String delete(@PathVariable("id") Long id, Principal principal) {
         Question question = questionService.getQuestion(id);
         questionService.delete(question);
         long productId = question.getProduct().getId();
+
+        if(!question.getMember().getUsername().equals(principal.getName())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한 없음");
+        }
 
         return String.format("redirect:/product/detail/%s", productId);
     }
