@@ -13,9 +13,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class QuestionService {
-
     private final QuestionRepository questionRepository;
-
 
     public void create(Product product, Member member, String content) {
         Question q = new Question();
@@ -28,14 +26,13 @@ public class QuestionService {
 
     public Question getQuestion(Long id) {
         Optional<Question> question = questionRepository.findById(id);
+
         if (question.isPresent()) {
             return question.get();
         } else {
-            throw new RuntimeException("question is not found");
+            throw new RuntimeException("question not found");
         }
     }
-
-
 
     public void modify(Question question, String content) {
         question.setContent(content);

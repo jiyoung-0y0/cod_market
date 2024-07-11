@@ -22,32 +22,37 @@ public class QuestionController {
     private final MemberService memberService;
 
     @PostMapping("/create/{id}")
-    public String create(@PathVariable("id") Long id,
-                         Principal principal,
-                         @RequestParam("content") String content){
+    public String create(
+            @PathVariable("id") Long id,
+            Principal principal,
+            @RequestParam("content") String content
+    ) {
         Product product = productService.getProduct(id);
         Member member = memberService.findByUserName(principal.getName());
+
         questionService.create(product, member, content);
 
-        return String.format("redirect:/product/detail/%s",id);
+        return String.format("redirect:/product/detail/%s", id);
     }
 
     @GetMapping("/modify/{id}")
-    public String modify(@PathVariable("id") Long id, Model model){
+    public String modify(@PathVariable("id") Long id, Model model) {
         Question question = questionService.getQuestion(id);
 
-        model.addAttribute("question",question);
+        model.addAttribute("question", question);
         return "question/modify";
     }
 
     @PostMapping("/modify/{id}")
-    public String modify(@PathVariable("id") Long id,
-                         Principal principal,
-                         @RequestParam("content") String content){
+    public String modify(
+            @PathVariable("id") Long id,
+            Principal principal,
+            @RequestParam("content") String content
+    ) {
         Question question = questionService.getQuestion(id);
-        questionService.modify(question,content);
+        questionService.modify(question, content);
         long productId = question.getProduct().getId();
 
-        return String.format("redirect:/product/detail/%s",id);
+        return String.format("redirect:/product/detail/%s", productId);
     }
 }
