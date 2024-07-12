@@ -7,7 +7,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>덩무겅</title>
+    <title>test</title>
 
     <!-- 제이쿼리 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -28,7 +28,7 @@
 
 <header>
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-[#486f75]">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-blue-900">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">COD 마켓</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -40,6 +40,7 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/">홈</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/product/list">강의리스트</a>
                     </li>
@@ -48,15 +49,15 @@
                         <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a>
                         <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" sec:authorize="isAnonymous()" href="/member/join">회원가입</a>
                     </li>
-
                 </ul>
-                <div class="text-white mr-2" sec:authorize="isAuthenticated()" th:text="@{|${#authentication.name}님|}"></div>
+                <div class="text-white mr-5 mb-3 md:!mb-0" sec:authorize="isAuthenticated()" th:text="@{|${#authentication.name}님|}"></div>
                 <form class="d-flex">
                     <input class="form-control me-2" type="text" id="search_kw" th:value="${kw}" placeholder="상품명을 입력해주세요." aria-label="Search">
-                    <button class="btn btn-outline-info whitespace-nowrap" type="button" id="btn_search">검색</button>
+                    <button class="btn btn-outline-light whitespace-nowrap" type="button" id="btn_search">검색</button>
                 </form>
             </div>
         </div>
