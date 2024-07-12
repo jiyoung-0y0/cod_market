@@ -7,7 +7,6 @@ import com.cod.market.product.entity.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,10 +15,10 @@ public class CartService {
     private final CartRepository cartRepository;
 
     public void add(Product product, Member member) {
-        Cart c = new Cart();
-        c.setProduct(product);
-        c.setMember(member);
-        c.setCreateDate(LocalDateTime.now());
+        Cart c = Cart.builder()
+                .product(product)
+                .member(member)
+                .build();
 
         cartRepository.save(c);
     }
