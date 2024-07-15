@@ -16,3 +16,6 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+custom:
+  genFileDirPath: C:\work\genFile
