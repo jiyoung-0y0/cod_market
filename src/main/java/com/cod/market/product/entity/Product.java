@@ -26,7 +26,7 @@ public class Product extends BaseEntity {
     private String description;
     private int price;
     private int hitCount;
-
+    private String thumbnailImg;
     private String isActive;
 
     @ManyToOne
