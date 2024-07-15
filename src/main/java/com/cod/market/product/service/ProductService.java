@@ -26,10 +26,11 @@ public class ProductService {
         return productRepository.findAllByKeyword(kw,pageable);
     }
 
-    public void create(String name, int price) {
+    public void create(String name, int price, String description) {
 
         Product p = Product.builder()
                 .name(name)
+                .description(description)
                 .price(price)
                 .build();
         productRepository.save(p);
