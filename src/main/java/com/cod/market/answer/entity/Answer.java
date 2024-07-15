@@ -5,10 +5,14 @@ import com.cod.market.member.entity.Member;
 import com.cod.market.question.entity.Question;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Answer extends BaseEntity {
 
     private String comment;

@@ -7,12 +7,16 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
 @Entity
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Market extends BaseEntity {
 
     private String email;
