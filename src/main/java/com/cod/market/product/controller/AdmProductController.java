@@ -21,9 +21,9 @@ public class AdmProductController {
 
     @GetMapping("/create")
     public String create(Model model) {
-        List<Product> productsList = productService.getList();
+        List<Product> productList = productService.getList();
 
-        model.addAttribute("Product");
+        model.addAttribute("productList", productList);
         return "adm/product/create";
     }
 
