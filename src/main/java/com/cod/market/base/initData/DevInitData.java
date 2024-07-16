@@ -20,6 +20,12 @@ public class DevInitData implements BeforeInitData{
             memberService.join("user2", password, "user2@test.com","user2");
             memberService.join("user3", password, "user3@test.com","user3");
             memberService.join("user4", password, "user4@test.com","user4");
+
+            //product init
+            productService.create("타이틀1","1. 설명", 1000);
+            productService.create("타이틀2","2. 설명", 2000);
+            productService.create("타이틀3","3. 설명", 3000);
+            productService.create("타이틀4","4. 설명", 4000);
         };
     }
 }
