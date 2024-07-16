@@ -1,5 +1,7 @@
 package com.cod.market.rebate.entity;
 
+import com.cod.market.base.entity.BaseEntity;
+import com.cod.market.order.entity.Order;
 import com.cod.market.order.entity.OrderItem;
 import com.cod.market.product.entity.Product;
 import jakarta.persistence.Entity;
@@ -18,11 +20,12 @@ import static jakarta.persistence.FetchType.LAZY;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class RebateOrderItem {
+public class RebateOrderItem extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private OrderItem orderItem;
     @ManyToOne(fetch = LAZY)
-    private OrderItem order;
+    private Order order;
+    @ManyToOne(fetch = LAZY)
     private Product product;
 
     private int price; // 판매가

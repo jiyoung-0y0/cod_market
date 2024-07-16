@@ -16,7 +16,6 @@ import static jakarta.persistence.FetchType.LAZY;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-
 public class CashLog extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private Member member;

@@ -22,6 +22,7 @@ public class OrderItem extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     private Order order;
     private LocalDateTime payDate;
+    @ManyToOne(fetch = LAZY)
     private Product product;
 
     private int price; // 판매가
