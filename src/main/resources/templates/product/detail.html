@@ -158,6 +158,15 @@
                 appScheme: null,
             }
 
+            console.log(requestJson);
+            tossPayments.requestPayment(method, requestJson).catch(function (error) {
+                if (error.code === "USER_CANCEL") {
+                    alert("유저가 취소했습니다.");
+                } else {
+                    alert(error.message);
+                }
+            });
+
             tossPayments.requestPayment(method, requestJson)
         }
     </script>
