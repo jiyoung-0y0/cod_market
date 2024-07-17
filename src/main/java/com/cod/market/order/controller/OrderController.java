@@ -1,5 +1,6 @@
 package com.cod.market.order.controller;
 
+import com.cod.market.order.service.OrderService;
 import com.cod.market.product.entity.Product;
 import com.cod.market.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +26,13 @@ import java.util.Base64;
 @RequestMapping("/order")
 @RequiredArgsConstructor
 public class OrderController {
-
     @Value("${custom.paymentSecretKey}")
     private String paymentSecretKey;
     private final ProductService productService;
+    private final OrderService orderService;
 
     @GetMapping("/detail")
-    public String detail(Model model, @RequestParam("productId") Long productId){
+    public String detail(Model model, @RequestParam("productId") Long productId) {
         Product product = productService.getProduct(productId);
 
         model.addAttribute("product", product);
@@ -45,8 +46,6 @@ public class OrderController {
             @RequestParam(value = "orderId") String orderId,
             @RequestParam(value = "amount") Integer amount,
             @RequestParam(value = "paymentKey") String paymentKey) throws Exception {
-
-
 
         Base64.Encoder encoder = Base64.getEncoder();
         byte[] encodedBytes = encoder.encode(paymentSecretKey.getBytes("UTF-8"));
@@ -96,6 +95,8 @@ public class OrderController {
             model.addAttribute("code", (String) jsonObject.get("code"));
             model.addAttribute("message", (String) jsonObject.get("message"));
         }
+
+//        orderService.save();
 
         return "order/success";
     }
